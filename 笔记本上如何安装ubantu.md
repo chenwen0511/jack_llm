@@ -14,7 +14,7 @@ https://ftp.sjtu.edu.cn/ubuntu-cd/24.04/ubuntu-24.04.1-desktop-amd64.iso.torrent
 
 
 
-# 2. u盘制作
+# 2. u盘制作-失败案例
 注意：准备一个u盘 如果里面有东西请备份到别处
 
 ## 2.1 使用ultraiso工具导入ubantu24.04 iso文件
@@ -29,6 +29,13 @@ https://ftp.sjtu.edu.cn/ubuntu-cd/24.04/ubuntu-24.04.1-desktop-amd64.iso.torrent
 ![写入](image/4fd80167daa68718259f94027da332bf.png)
 
 
+# 3. u盘制作-rufus
+更换制作工具，下载链接以及下载地址：
+[rufus](http://rufus.ie/zh/)
+[下载链接](https://github.com/pbatard/rufus/releases/download/v4.5/rufus-4.5.exe)
+
+制作截图：
+![截图](image/20240923003315.png)
 
 
 ## 3 安装
