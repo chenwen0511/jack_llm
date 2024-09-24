@@ -1,8 +1,9 @@
 import json
 import requests
 import os
-import pymysql
-from dotenv import load_dotenv, find_dotenv
+# import pymysql
+import sqlite3
+# from dotenv import load_dotenv, find_dotenv
 
 # todo: 1.描述数据库表结构（单一个表格）
 database_schema_string = """
@@ -15,7 +16,8 @@ database_schema_string = """
   `sal` int DEFAULT NULL,--员工的月薪, 默认为空
   `comm` int DEFAULT NULL,--员工年终奖, 默认为空
   `deptno` int DEFAULT NULL,--员工部分编号, 默认为空
-)"""
+)
+"""
 
 # todo: 2.描述数据库表结构（多个表格）
 database_schema_string1 = """
@@ -70,14 +72,17 @@ def ask_database(query):
     """连接数据库，进行查询"""
     # 1.连接到 MySQL 数据库
     print("进入函数内部")
-    conn = pymysql.connect(
-        host='localhost',
-        port=3306,
-        user='root',
-        password='123456',
-        database='itcast',
-        charset='utf8mb4',  # 指定游标类，返回结果为字典
-    )
+
+    conn = sqlite3.connect('example.db')
+
+    # conn = pymysql.connect(
+    #     host='localhost',
+    #     port=3306,
+    #     user='root',
+    #     password='123456',
+    #     database='itcast',
+    #     charset='utf8mb4',  # 指定游标类，返回结果为字典
+    # )
     # 2. 创建游标
     cursor = conn.cursor()
     print(f'开始测试')

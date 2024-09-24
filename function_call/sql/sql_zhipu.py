@@ -1,12 +1,17 @@
 from zhipuai import ZhipuAI
-from dotenv import load_dotenv, find_dotenv
+# from dotenv import load_dotenv, find_dotenv
 from sql_function_tools import *
 import os
-_ = load_dotenv(find_dotenv())
+
+
+# _ = load_dotenv(find_dotenv())
 # 获取环境变量 ZhiPu_API_KEY
-zhupu_ak = os.environ['ZHIPU_API_KEY']
+# zhupu_ak = os.environ['ZHIPU_API_KEY']
+zhupu_ak = "3fef7e6978f08341a791af0bd0bdf715.jWDwjRvDnp5nEP4v"
+
 client = ZhipuAI(api_key=zhupu_ak) # 填写您自己的APIKey
 ChatGLM = "glm-4"
+
 
 def chat_completion_request(messages, tools=None, tool_choice=None, model=ChatGLM):
     try:
