@@ -3,9 +3,10 @@ import os
 from tools import *
 from zhipuai import ZhipuAI
 # _ = load_dotenv(find_dotenv())
+
+import account_secret
 zhupu_ak = os.environ.get('ZHIPU_API_KEY') # 避免泄露keys
-### 注意需要注释掉  ####
-zhupu_ak = "3fef7e6978f08341a791af0bd0bdf715.jWDwjRvDnp5nEP4v"
+
 client = ZhipuAI(api_key=zhupu_ak) # 填写您自己的APIKeypi
 ChatGLM = "glm-4"
 def chat_completion_request(messages, tools=None, tool_choice=None, model=ChatGLM):

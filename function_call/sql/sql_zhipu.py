@@ -3,12 +3,11 @@ from zhipuai import ZhipuAI
 from sql_function_tools import *
 import os
 
+import account_secret
 
 # _ = load_dotenv(find_dotenv())
 # 获取环境变量 ZhiPu_API_KEY
-# zhupu_ak = os.environ['ZHIPU_API_KEY']
-zhupu_ak = "3fef7e6978f08341a791af0bd0bdf715.jWDwjRvDnp5nEP4v"
-
+zhupu_ak = os.environ['ZHIPU_API_KEY']
 client = ZhipuAI(api_key=zhupu_ak) # 填写您自己的APIKey
 ChatGLM = "glm-4"
 
