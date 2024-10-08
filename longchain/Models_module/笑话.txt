@@ -1,0 +1,29 @@
+D:\06-github\jack_llm\.venv2\Scripts\python.exe D:\06-github\jack_llm\longchain\Models_module\demo_llms.py
+[WARNING][2024-10-08 23:37:38.668] redis_rate_limiter.py:21 [t:30736]: no redis installed, RedisRateLimiter unavailable
+[INFO][2024-10-08 23:37:38.700] oauth.py:277 [t:30736]: trying to refresh token for ak `Jubs1d***`
+[INFO][2024-10-08 23:37:38.910] oauth.py:304 [t:30736]: successfully refresh token
+ 这是一个我喜欢的笑话:
+
+有一天,一个程序员去参加面试。面试官问他:“你有什么特长?”
+
+程序员回答道:“我擅长编写各种语言程序,包括 Python、Java、C++ 等等。”
+
+面试官有些惊讶,问道:“哇,真的吗?那你能证明一个数学公式吗?”
+
+程序员想了一下,回答道:“当然可以。比如说,4+4=8。”
+
+面试官吃惊地看着他,问道:“这是数学公式?”
+
+程序员回答道:“是的,这是基础的算术公式。”
+
+面试官感到非常惊讶,问道:“那么你能否证明 2+2=4 呢?”
+
+程序员想了想,回答道:“不,我不行。这是基础的算术公式,而且我已经证明过了,4+4=8。”
+
+面试官笑了起来,说道:“好吧,那么你就通过面试吧。”
+
+程序员问道:“通过什么?”
+
+面试官回答道:“通过你证明了一个数学公式。”
+
+Process finished with exit code 0
