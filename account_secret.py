@@ -8,7 +8,7 @@ os.environ['MM_API_KEY'] = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJHcm91cE5hbWU
 os.environ["ZHIPU_API_KEY"] = "3fef7e6978f08341a791af0bd0bdf715.jWDwjRvDnp5nEP4v"
 
 # 126 chenwen mail
-os.environ["MY_126_PWD"] = "chenwen@880511"
+os.environ["MY_126_PWD"] = "XVxGmEnPNHD4uj3m"
 
 # hugging face
 os.environ["HF_API_TOKEN"] = "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"

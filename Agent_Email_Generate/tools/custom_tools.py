@@ -40,19 +40,19 @@ class CustomTools():
         # 发件人
         from_name = "小可爱"
         # 发件邮箱
-        from_addr = "chenwen0511@163.com"
+        from_addr = "chenwen0511@126.com"
         # 发件邮箱授权码，注意不是QQ邮箱密码
-        from_pwd = my_126_pwd
+        from_pwd = my_126_pwd  # 注意这里是授权码 不是邮箱的登录密码
         # 收件邮箱
-        to_addr = "chenwen0511@oytlook.com"
+        to_addr = "chenwen0511@outlook.com"  # 接收邮件的邮箱
         # 邮件标题
         my_title = "520小情书"
         # 邮件正文
         # 书信路径
-        filename = r"poie.txt"
+        filename = r"../poie.txt"
 
         # 定义md文档的绝对路径
-        with open(filename)as f:
+        with open(filename, encoding="utf-8", mode="r")as f:
             my_msg = f.read()
         # MIMEText三个主要参数
         # 1. 邮件内容
@@ -63,7 +63,9 @@ class CustomTools():
         # 邮件的标题
         msg['Subject'] = my_title
         # SMTP服务器地址，QQ邮箱的SMTP地址是"smtp.qq.com"
-        smtp_srv = "smtp.163.com"
+        # smtp_srv = "smtp.163.com"
+        smtp_srv = "smtp.126.com"  # todo 注意 这里需要修改smtp服务器的地址
+
 
         try:
             # 不能直接使用smtplib.SMTP来实例化，第三方邮箱会认为它是不安全的而报错
@@ -81,6 +83,11 @@ class CustomTools():
             print('发送成功')
         except Exception as e:
             print('发送失败')
+            raise e
         finally:
             # 无论发送成功还是失败都要退出你的QQ邮箱
             srv.quit()
+
+if __name__ == '__main__':
+    tool = CustomTools()
+    tool.send_message()

@@ -98,10 +98,8 @@ task3 = Task(
 crew = Crew(
   agents=[poet, letter_writer, sender],
   tasks=[task1, task2, task3],
-  verbose=True,
+  verbose=2,
   process=Process.sequential, # 使用按顺序执行任务的流程。上一个任务的结果将作为附加内容传递给下一个任务。
-  max_rpm=1
-
 )
 
 # Get your crew to work!
