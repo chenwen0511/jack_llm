@@ -13,3 +13,9 @@ os.environ["MY_126_PWD"] = "chenwen@880511"
 # hugging face
 os.environ["HF_API_TOKEN"] = "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"
 os.environ["HUGGINGFACE_API_KEY"] = "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"
+
+
+# QianFan
+os.environ["QIANFAN_AK"] = "Jubs1dFiyqwzcSiEx9comwTF"
+os.environ["QIANFAN_SK"] = "0q5zmIjO6G5lGddtHz2y8x5qH4AO9gaD"
+
