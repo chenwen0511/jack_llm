@@ -17,9 +17,9 @@ import account_secret
 #                     )
 
 
-# client = ChatZhipuAI(api_key=os.environ["ZHIPU_API_KEY"],model="huggingface/glm-4")
+client = ChatZhipuAI(api_key=os.environ["ZHIPU_API_KEY"],model="glm-4")
 # client = ChatZhipuAI(api_key=os.environ["ZHIPU_API_KEY"],model="huggingface/meta-llama/Meta-Llama-3.1-8B-Instruct")
-client = ChatZhipuAI(api_key=os.environ["ZHIPU_API_KEY"],model="huggingface/meta-llama/Llama-2-7b-chat")
+# client = ChatZhipuAI(api_key=os.environ["ZHIPU_API_KEY"],model="huggingface/meta-llama/Llama-2-7b-chat")
 
 # 定义你的Agent以及他们的角色和目标
 """
