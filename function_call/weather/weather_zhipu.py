@@ -1,10 +1,9 @@
 import os
-# from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv, find_dotenv
 from tools import *
 from zhipuai import ZhipuAI
-# _ = load_dotenv(find_dotenv())
+_ = load_dotenv(find_dotenv())
 
-import account_secret
 zhupu_ak = os.environ.get('ZHIPU_API_KEY') # 避免泄露keys
 
 client = ZhipuAI(api_key=zhupu_ak) # 填写您自己的APIKeypi

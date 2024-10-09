@@ -3,14 +3,12 @@ import os
 # os.environ["https_proxy"] = "http://localhost:7890"
 from crewai import Agent, Task, Crew, Process
 from tools.custom_tools import CustomTools
-# from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv, find_dotenv
 from langchain_community.chat_models import ChatOpenAI,ChatZhipuAI
 
-# 加载秘钥
-import account_secret
 
 #线上大模型--API方式
-# _ = load_dotenv(find_dotenv())
+_ = load_dotenv(find_dotenv())
 
 # client = ChatOpenAI(model_name="gpt-3.5-turbo",api_key=os.environ["OPENAI_API_KEY"],
 #                     base_url=os.environ['OPENAI_BASE_URL']

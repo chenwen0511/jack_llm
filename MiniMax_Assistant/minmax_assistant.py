@@ -2,9 +2,8 @@ import requests
 import json
 import time
 import os
-import account_secret
-# from dotenv import load_dotenv, find_dotenv
-# _ = load_dotenv(find_dotenv())
+from dotenv import load_dotenv, find_dotenv
+_ = load_dotenv(find_dotenv())
 
 GroupId = os.environ['MM_GROUPID']
 API_KEY = os.environ['MM_API_KEY']

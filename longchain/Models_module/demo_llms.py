@@ -1,7 +1,8 @@
 import os
 from langchain_community.llms import QianfanLLMEndpoint
 
-import account_secret
+from dotenv import load_dotenv, find_dotenv
+_ = load_dotenv(find_dotenv())
 
 # 1.设置qianfan的API-KEY和Serect-KEY
 # os.environ["QIANFAN_AK"] = QIANFAN_AK

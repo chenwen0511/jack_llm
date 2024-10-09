@@ -1,11 +1,11 @@
 from zhipuai import ZhipuAI
-# from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv, find_dotenv
 from sql_function_tools import *
 import os
 
-import account_secret
 
-# _ = load_dotenv(find_dotenv())
+_ = load_dotenv(find_dotenv())
+
 # 获取环境变量 ZhiPu_API_KEY
 zhupu_ak = os.environ['ZHIPU_API_KEY']
 client = ZhipuAI(api_key=zhupu_ak) # 填写您自己的APIKey

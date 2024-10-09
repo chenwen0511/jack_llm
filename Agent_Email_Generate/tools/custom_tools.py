@@ -4,9 +4,10 @@ import os
 import smtplib
 from email.mime.text import MIMEText
 from email.utils import formataddr
+from dotenv import load_dotenv, find_dotenv
 
-import account_secret
 
+_ = load_dotenv(find_dotenv())
 my_126_pwd = os.environ['MY_126_PWD']
 
 
