@@ -1,0 +1,39 @@
+
+0.
+创建虚拟环境
+安装依赖
+model_scope下载
+    chatglm2-6b-int4
+    m3e-base
+
+先将model.py这个模型的测试方法跑通
+    if __name__ == '__main__':
+        llm = ChatGLM2()
+        llm.load_model(model_path='chatglm2-6b-int4')
+        print(f'llm--->{llm}')
+        print(llm.invoke("1+1等于几？"))
+跑通get_vector.py
+
+
+
+1. ChatGLMTokenizer._pad() got an unexpected keyword argument 'padding_side'这个问题
+pip install transformers==4.40.2
+
+2. model.py  CPU本地跑需要修改这一行
+        # 加载模型
+        self.model = AutoModel.from_pretrained(model_path, trust_remote_code=True).float()
+
+
+3. model.py 需要修改模型的路径
+    llm.load_model(model_path='chatglm2-6b-int4')
+
+4. embedding 对句子做嵌入 需要修改嵌入模型路径
+    # 定义向量模型路径
+    EMBEDDING_MODEL = '.m3e-base'
+
+5. ImportError: failed to find libmagic. Check your installation
+python-magic简介：Python -magic是libmagic文件类型标识库的Python接口。Libmagic通过根据预定义的文件类型列表检查文件头来识别文件类型。该功能通过Unix命令文件向命令行公开。
+解决方法：
+更换magic
+pip uninstall python-magic
+pip install python-magic-bin==0.4.14
