@@ -1,0 +1,4 @@
+datasets==2.4.0
+evaluate==0.2.2
+matplotlib==3.6.0
+rich==12.5.1
