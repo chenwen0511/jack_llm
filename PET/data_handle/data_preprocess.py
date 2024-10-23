@@ -75,19 +75,20 @@ def convert_example(
         tokenized_output['token_type_ids'].append(encoded_inputs["token_type_ids"])
         tokenized_output['attention_mask'].append(encoded_inputs["attention_mask"])
         tokenized_output['mask_positions'].append(encoded_inputs["mask_position"])
-        # print(f'tokenized_output-->{tokenized_output}')
 
         if train_mode:
             label_encoded = tokenizer(text=[label])  # 将label补到最大长度
-            # print(f'label_encoded-->{label_encoded}')
-
+            # 洗浴
+            # [[101, 3819, 3861, 102]]
+            # 3820: 洗
+            # 3862: 浴
+            # 101  [CLS]
+            # 102  [SEP]
             label_encoded = label_encoded['input_ids'][0][1:-1]
-            # print(f'label_encoded-->{label_encoded}')
-
+            # label最大长度截取
             label_encoded = label_encoded[:max_label_len]
-            # print(f'tokenizer.pad_token_id-->{tokenizer.pad_token_id}')
+            # 被截掉的用[PAD]替代
             label_encoded = label_encoded + [tokenizer.pad_token_id] * (max_label_len - len(label_encoded))
-
             tokenized_output['mask_labels'].append(label_encoded)
 
     for k, v in tokenized_output.items():

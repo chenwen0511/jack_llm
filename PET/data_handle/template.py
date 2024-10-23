@@ -3,6 +3,7 @@ from rich import print
 from transformers import AutoTokenizer
 import numpy as np
 import sys
+import re
 sys.path.append('..')
 from pet_config import *
 
@@ -18,7 +19,8 @@ class HardTemplate(object):
         """
         self.prompt = prompt
         self.inputs_list = []                       # 根据文字prompt拆分为各part的列表
-        self.custom_tokens = set(['MASK'])          # 从prompt中解析出的自定义token集合
+        self.custom_tokens = set()          # 从prompt中解析出的自定义token集合
+        self.custom_tokens.add("MASK")
         self.prompt_analysis()                         # 解析prompt模板
 
     def prompt_analysis(self):
@@ -30,22 +32,14 @@ class HardTemplate(object):
             inputs_list -> ['这', '是', '一', '条', 'MASK', '评', '论', '：', 'textA', '。']
             custom_tokens -> {'textA', 'MASK'}
         """
-        idx = 0
-        while idx < len(self.prompt):
-            str_part = ''
-            if self.prompt[idx] not in ['{', '}']:
-                self.inputs_list.append(self.prompt[idx])
-            if self.prompt[idx] == '{':                  # 进入自定义字段
-                idx += 1
-                while self.prompt[idx] != '}':
-                    str_part += self.prompt[idx]             # 拼接该自定义字段的值
-                    idx += 1
-            elif self.prompt[idx] == '}':
-                raise ValueError("Unmatched bracket '}', check your prompt.")
-            if str_part:
-                self.inputs_list.append(str_part)
-                self.custom_tokens.add(str_part)             # 将所有自定义字段存储，后续会检测输入信息是否完整
-            idx += 1
+        # 使用非贪婪模式来匹配花括号中的内容或普通字符
+        pattern = r'(\{.*?\}|.)'
+        # 使用findall方法来获取所有匹配的部分
+        for word in re.findall(pattern, self.prompt):
+            if word.startswith("{"):
+                word = word[1:-1]
+                self.custom_tokens.add(word)
+            self.inputs_list.append(word)
 
     def __call__(self,
                  inputs_dict: dict,
@@ -72,30 +66,19 @@ class HardTemplate(object):
                 'mask_position': [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             }
         """
-        # 定义输出格式
-        outputs = {
-            'text': '', 
-            'input_ids': [],
-            'token_type_ids': [],
-            'attention_mask': [],
-            'mask_position': []
-        }
 
-        str_formated = ''
-        for value in self.inputs_list:
+        def custom_token_map(value):
             if value in self.custom_tokens:
-                if value == 'MASK':
-                    str_formated += inputs_dict[value] * mask_length
-                else:
-                    str_formated += inputs_dict[value]
-            else:
-                str_formated += value
+                return inputs_dict[value] * mask_length if value == 'MASK' else inputs_dict[value]
+            return value
+        str_formated = "".join([custom_token_map(word) for word in self.inputs_list])
         print(f'str_formated-->{str_formated}')
         encoded = tokenizer(text=str_formated,
                             truncation=True,
                             max_length=max_seq_len,
                             padding='max_length')
         print(f'encoded--->{encoded}')
+        outputs = dict()
         outputs['input_ids'] = encoded['input_ids']
         outputs['token_type_ids'] = encoded['token_type_ids']
         outputs['attention_mask'] = encoded['attention_mask']
@@ -119,5 +102,122 @@ if __name__ == '__main__':
                 mask_length=2)
     print(tep)
 
-    print(tokenizer.convert_ids_to_tokens([3819, 3352, 3819, 3352]))
-    print(tokenizer.convert_tokens_to_ids(['网', '球']))
+    # print(tokenizer.convert_ids_to_tokens([3819, 3352, 3819, 3352]))
+    # print(tokenizer.convert_tokens_to_ids(['网', '球']))
+    """
+['这', '是', '一', '条', 'MASK', '评', '论', '：', 'textA']
+{'textA', 'MASK'}
+str_formated-->这是一条[MASK][MASK]评论：包装不错，苹果挺甜的，个头也大。
+encoded--->{'input_ids': [101, 6821, 3221, 671, 3340, 103, 103, 6397, 6389, 
+8038, 1259, 6163, 679, 7231, 8024, 5741, 3362, 2923, 4494, 4638, 8024, 702, 
+1928, 738, 1920, 511, 102, 0, 0, 0], 'token_type_ids': [0, 0, 0, 0, 0, 0, 0, 0,
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+'attention_mask': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+1, 1, 1, 1, 1, 1, 1, 0, 0, 0]}
+{
+    'input_ids': [
+        101,
+        6821,
+        3221,
+        671,
+        3340,
+        103,
+        103,
+        6397,
+        6389,
+        8038,
+        1259,
+        6163,
+        679,
+        7231,
+        8024,
+        5741,
+        3362,
+        2923,
+        4494,
+        4638,
+        8024,
+        702,
+        1928,
+        738,
+        1920,
+        511,
+        102,
+        0,
+        0,
+        0
+    ],
+    'token_type_ids': [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    'attention_mask': [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+    ],
+    'text': 
+'[CLS]这是一条[MASK][MASK]评论：包装不错，苹果挺甜的，个头也大。[SEP][PAD][PAD]
+[PAD]',
+    'mask_position': [5, 6]
+}    
+    
+    
+    
+    
+    """

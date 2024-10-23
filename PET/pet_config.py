@@ -1,17 +1,21 @@
 # coding:utf-8
+import os.path
+
 import torch
 import sys
 # print(sys.path)
+
+BASE_DIR = os.path.dirname(__file__)
 
 
 class ProjectConfig(object):
     def __init__(self):
         self.device = 'cuda:0' if torch.cuda.is_available() else 'cpu' # windows电脑/linux服务器
-        self.pre_model = r'D:\06-github\jack_llm\PET\bert-base-chinese'
-        self.train_path = r'D:\06-github\jack_llm\PET\data\train.txt'
-        self.dev_path = r'D:\06-github\jack_llm\PET\data\dev.txt'
-        self.prompt_file = r'D:\06-github\jack_llm\PET\data\prompt.txt'
-        self.verbalizer = r'D:\06-github\jack_llm\PET\data\verbalizer.txt'
+        self.pre_model = BASE_DIR + r'\bert-base-chinese'
+        self.train_path = BASE_DIR + r'\data\train.txt'
+        self.dev_path = BASE_DIR + r'\data\dev.txt'
+        self.prompt_file = BASE_DIR + r'\data\prompt.txt'
+        self.verbalizer = BASE_DIR + r'\data\verbalizer.txt'
         self.max_seq_len = 512
         self.batch_size = 8
         self.learning_rate = 5e-5
@@ -21,7 +25,7 @@ class ProjectConfig(object):
         self.epochs = 2
         self.logging_steps = 10
         self.valid_steps = 20
-        self.save_dir = r'D:\06-github\jack_llm\PET\checkpoints'
+        self.save_dir = BASE_DIR + r'\checkpoints'
 
 
 if __name__ == '__main__':

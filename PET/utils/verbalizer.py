@@ -45,7 +45,7 @@ class Verbalizer(object):
     def find_sub_labels(self, label: Union[list, str]):
         """
         通过标签找到所有的子标签。
-
+        这里是根据单个的主标签
         Args:
             label (Union[list, str]): 标签, 文本型 或 id_list, e.g. -> '体育' or [860, 5509]
         
@@ -66,7 +66,7 @@ class Verbalizer(object):
         sub_labels = self.label_dict[label]
         ret = {'sub_labels': sub_labels}
         token_ids = [_id[1:-1] for _id in self.tokenizer(sub_labels)['input_ids']]
-        # print(f'token_ids-->{token_ids}')
+        # 根据max_label_len 对长度进行截断 或者填充
         for i in range(len(token_ids)):
             token_ids[i] = token_ids[i][:self.max_label_len]                    # 对标签进行截断与补齐
             if len(token_ids[i]) < self.max_label_len:
