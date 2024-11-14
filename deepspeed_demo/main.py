@@ -1,5 +1,6 @@
 import torch
 import torchvision
+import deepspeed
 
 # 用于构建神经网络模型
 import torch.nn as nn
@@ -7,14 +8,15 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 import argparse
-import deepspeed
-
+import torchvision.transforms as transforms
 
 # 创建训练数据集
 trainset = torchvision.datasets.CIFAR10(root='./data',
                                         train=True,
                                         download=True,
+                                        transform=transforms.ToTensor()
                                         )
+
 
 # 创建数据加载器，批量加载数据并处理数据加载的并行化
 trainloader = torch.utils.data.DataLoader(trainset,
@@ -28,6 +30,7 @@ trainloader = torch.utils.data.DataLoader(trainset,
 # 创建测试数据集
 testset = torchvision.datasets.CIFAR10(root='./data', train=False,
                                        download=True,
+                                       transform=transforms.ToTensor()
                                        )
 
 testloader = torch.utils.data.DataLoader(testset,
