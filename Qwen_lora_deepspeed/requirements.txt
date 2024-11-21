@@ -1,0 +1,9 @@
+optimum
+auto-gptq
+accelerate==0.27.2
+transformers==4.32.0
+tiktoken
+einops
+scipy
+peft
+deepspeed

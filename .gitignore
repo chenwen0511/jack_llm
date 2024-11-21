@@ -7,3 +7,4 @@ account_secret.py
 PET/bert-base-chinese
 *.gz
 deepspeed_demo/data
+*.ipynb_checkpoints
