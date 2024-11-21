@@ -9,12 +9,16 @@ python inference.py
 
 
 ### 3. finetune
+环境准备：
+![img.png](deepspeed/img/img.png)
+![img_1.png](deepspeed/img/img_1.png)
+
 安装依赖
 `pip install -r requirements.txt`
 
 修改finetune_lora_single_gpu.ipynb中 模型路径 微调数据的路径
 依次运行单元格
-
+![img.png](deepspeed/img/img.png)
 
 
 
