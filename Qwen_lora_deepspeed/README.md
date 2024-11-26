@@ -18,7 +18,6 @@ python inference.py
 
 修改finetune_lora_single_gpu.ipynb中 模型路径 微调数据的路径
 依次运行单元格
-![img.png](deepspeed/img/img.png)
 
 
 
