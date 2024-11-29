@@ -30,6 +30,9 @@ IGNORE_TOKEN_ID = LabelSmoother.ignore_index
 @dataclass
 class ModelArguments:
     model_name_or_path: Optional[str] = field(default="Qwen/Qwen-7B")
+    output_dir: str = field(
+        default="output", metadata={"help": "Path to the save model"}
+    )
 
 # 使用dataclass装饰器定义DataArguments类，用于存储数据参数
 @dataclass
@@ -143,9 +146,13 @@ def safe_save_model_for_hf_trainer(trainer: transformers.Trainer, output_dir: st
             # 如果不使用LoRA，直接获取模型的状态字典
             state_dict = trainer.model.state_dict()
     # 如果应该保存模型且当前进程是主进程
-    if trainer.args.should_save and trainer.args.local_rank == 0:
+    print("===============>", trainer.args.should_save)
+    if trainer.args.local_rank == 0:
         # 调用_trainer._save方法保存模型到指定目录
+        print("===============>", "begin save")
         trainer._save(output_dir, state_dict=state_dict)
+    print("===============>", "save finish")
+
 
 
 def preprocess(
@@ -439,6 +446,7 @@ def train():
 
     trainer.train()  # 开始训练
     trainer.save_state()  # 保存训练状态
+    safe_save_model_for_hf_trainer(trainer, model_args.output_dir)
 
 
 if __name__ == "__main__":

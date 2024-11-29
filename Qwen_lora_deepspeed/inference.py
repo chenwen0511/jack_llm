@@ -1,10 +1,8 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
-model_path = "/gemini/pretrain"
-
 # 可选的模型包括: "Qwen/Qwen-7B-Chat", "Qwen/Qwen-14B-Chat"
-tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
+tokenizer = AutoTokenizer.from_pretrained(r"D:\02-weights\Qwen1-8_chat", trust_remote_code=True)
 
 # 打开bf16精度，A100、H100、RTX3060、RTX3070等显卡建议启用以节省显存
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True, bf16=True).eval()
@@ -13,10 +11,10 @@ tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
 # 使用CPU进行推理，需要约32GB内存
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
 # 默认使用自动模式，根据设备自动选择精度
-model = AutoModelForCausalLM.from_pretrained(model_path, device_map="auto", trust_remote_code=True).eval()
+model = AutoModelForCausalLM.from_pretrained(r"D:\02-weights\Qwen1-8_chat", device_map="auto", trust_remote_code=True).eval()
 
 # 可指定不同的生成长度、top_p等相关超参
-model.generation_config = GenerationConfig.from_pretrained(model_path, trust_remote_code=True)
+model.generation_config = GenerationConfig.from_pretrained(r"D:\02-weights\Qwen1-8_chat", trust_remote_code=True)
 
 # 第一轮对话
 response, history = model.chat(tokenizer, "3.9和3.11，哪个值比较大", history=None)
